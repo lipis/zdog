@@ -13,13 +13,8 @@ var illo = new Zdog.Illustration({
 // lines
 new Zdog.Shape({
   addTo: illo,
-  path: [
-    { x: -6, y: -6 },
-    { x:  6, y: -6 },
-    { x: -6, y:  6 },
-    { x:  6, y:  6 },
-  ],
-  translate: { x: -12, y: -12 },
+  path: [{x: -6, y: -6}, {x: 6, y: -6}, {x: -6, y: 6}, {x: 6, y: 6}],
+  translate: {x: -12, y: -12},
   closed: false,
   color: eggplant,
   stroke: 2,
@@ -28,13 +23,8 @@ new Zdog.Shape({
 // move
 new Zdog.Shape({
   addTo: illo,
-  path: [
-    { x: -6, y: -6 },
-    { x:  6, y: -6 },
-    { move: { x: -6, y:  6 } },
-    { x:  6, y:  6 },
-  ],
-  translate: { x: 12, y: -12 },
+  path: [{x: -6, y: -6}, {x: 6, y: -6}, {move: {x: -6, y: 6}}, {x: 6, y: 6}],
+  translate: {x: 12, y: -12},
   closed: false,
   color: eggplant,
   stroke: 2,
@@ -44,17 +34,22 @@ new Zdog.Shape({
 new Zdog.Shape({
   addTo: illo,
   path: [
-    { x: -6, y: -6 }, // start
-    { arc: [
-      { x:  2, y: -6 }, // corner
-      { x:  2, y:  2 }, // end point
-    ]},
-    { arc: [ // start next arc from last end point
-      { x:  2, y:  6 }, // corner
-      { x:  6, y:  6 }, // end point
-    ]},
+    {x: -6, y: -6}, // start
+    {
+      arc: [
+        {x: 2, y: -6}, // corner
+        {x: 2, y: 2}, // end point
+      ],
+    },
+    {
+      arc: [
+        // start next arc from last end point
+        {x: 2, y: 6}, // corner
+        {x: 6, y: 6}, // end point
+      ],
+    },
   ],
-  translate: { x: -12, y: 12 },
+  translate: {x: -12, y: 12},
   closed: false,
   color: eggplant,
   stroke: 2,
@@ -64,14 +59,16 @@ new Zdog.Shape({
 new Zdog.Shape({
   addTo: illo,
   path: [
-    { x: -6, y: -6 }, // start
-    { bezier: [
-      { x:  2, y: -6 }, // start control point
-      { x:  2, y:  6 }, // end control point
-      { x:  6, y:  6 }, // end control point
-    ]},
+    {x: -6, y: -6}, // start
+    {
+      bezier: [
+        {x: 2, y: -6}, // start control point
+        {x: 2, y: 6}, // end control point
+        {x: 6, y: 6}, // end control point
+      ],
+    },
   ],
-  translate: { x: 12, y: 12 },
+  translate: {x: 12, y: 12},
   closed: false,
   color: eggplant,
   stroke: 2,
@@ -81,7 +78,7 @@ new Zdog.Shape({
 
 function animate() {
   illo.updateRenderGraph();
-  requestAnimationFrame( animate );
+  requestAnimationFrame(animate);
 }
 
 animate();

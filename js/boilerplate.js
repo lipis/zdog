@@ -10,66 +10,64 @@
  * Boilerplate & utils
  */
 
-( function( root, factory ) {
+(function(root, factory) {
   // module definition
-  if ( typeof module == 'object' && module.exports ) {
+  if (typeof module == 'object' && module.exports) {
     /* globals module */ // CommonJS
     module.exports = factory();
   } else {
     // browser global
     root.Zdog = factory();
   }
-}( this, function factory() {
+})(this, () => {
+  var Zdog = {};
 
-var Zdog = {};
+  Zdog.TAU = Math.PI * 2;
 
-Zdog.TAU = Math.PI * 2;
+  Zdog.extend = function(a, b) {
+    for (var prop in b) {
+      a[prop] = b[prop];
+    }
+    return a;
+  };
 
-Zdog.extend = function( a, b ) {
-  for ( var prop in b ) {
-    a[ prop ] = b[ prop ];
-  }
-  return a;
-};
+  Zdog.lerp = function(a, b, t) {
+    return (b - a) * t + a;
+  };
 
-Zdog.lerp = function( a, b, t ) {
-  return ( b - a ) * t + a;
-};
+  Zdog.modulo = function(num, div) {
+    return ((num % div) + div) % div;
+  };
 
-Zdog.modulo = function( num, div ) {
-  return ( ( num % div ) + div ) % div;
-};
+  var powerMultipliers = {
+    2: function(a) {
+      return a * a;
+    },
+    3: function(a) {
+      return a * a * a;
+    },
+    4: function(a) {
+      return a * a * a * a;
+    },
+    5: function(a) {
+      return a * a * a * a * a;
+    },
+  };
 
-var powerMultipliers = {
-  2: function( a ) {
-    return a * a;
-  },
-  3: function( a ) {
-    return a * a * a;
-  },
-  4: function( a ) {
-    return a * a * a * a;
-  },
-  5: function( a ) {
-    return a * a * a * a * a;
-  }
-};
+  Zdog.easeInOut = function(alpha, power) {
+    if (power == 1) {
+      return alpha;
+    }
+    alpha = Math.max(0, Math.min(1, alpha));
+    var isFirstHalf = alpha < 0.5;
+    var slope = isFirstHalf ? alpha : 1 - alpha;
+    slope = slope / 0.5;
+    // make easing steeper with more multiples
+    var powerMultiplier = powerMultipliers[power] || powerMultipliers[2];
+    var curve = powerMultiplier(slope);
+    curve = curve / 2;
+    return isFirstHalf ? curve : 1 - curve;
+  };
 
-Zdog.easeInOut = function( alpha, power ) {
-  if ( power == 1 ) {
-    return alpha;
-  }
-  alpha = Math.max( 0, Math.min( 1, alpha ) );
-  var isFirstHalf = alpha < 0.5;
-  var slope = isFirstHalf ? alpha : 1 - alpha;
-  slope = slope / 0.5;
-  // make easing steeper with more multiples
-  var powerMultiplier = powerMultipliers[ power ] || powerMultipliers[2];
-  var curve = powerMultiplier( slope );
-  curve = curve / 2;
-  return isFirstHalf ? curve : 1 - curve;
-};
-
-return Zdog;
-
-}));
+  return Zdog;
+});

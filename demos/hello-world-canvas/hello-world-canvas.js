@@ -17,7 +17,7 @@ var illo = new Zdog.Illustration({
 new Zdog.Ellipse({
   addTo: illo,
   diameter: 20,
-  translate: { z: 10 },
+  translate: {z: 10},
   stroke: 5,
   color: '#636',
 });
@@ -27,7 +27,7 @@ new Zdog.Rect({
   addTo: illo,
   width: 20,
   height: 20,
-  translate: { z: -10 },
+  translate: {z: -10},
   stroke: 3,
   color: '#E62',
   fill: true,
@@ -38,7 +38,7 @@ new Zdog.Rect({
 function animate() {
   illo.rotate.y += isSpinning ? 0.03 : 0;
   illo.updateRenderGraph();
-  requestAnimationFrame( animate );
+  requestAnimationFrame(animate);
 }
 
 animate();
